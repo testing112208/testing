@@ -1,7 +1,1 @@
-{
-  "/terms-of-service/page": "app/terms-of-service/page.js",
-  "/(admin)/ops-panel-7x/page": "app/(admin)/ops-panel-7x/page.js",
-  "/(admin)/ops-panel-7x/dashboard/page": "app/(admin)/ops-panel-7x/dashboard/page.js",
-  "/(admin)/ops-panel-7x/settings/page": "app/(admin)/ops-panel-7x/settings/page.js",
-  "/(admin)/ops-panel-7x/bookings/page": "app/(admin)/ops-panel-7x/bookings/page.js"
-}
+{}
