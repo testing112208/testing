@@ -1,0 +1,30 @@
+services:
+  - type: web
+    name: cab-serves-backend
+    env: node
+    plan: free # Free tier or paid plan works
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: node server.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGO_URI
+        sync: false # Set in dashboard
+      - key: JWT_SECRET
+        generateValue: true # Render can generate this or you set it
+      - key: REDIS_URL
+        sync: false
+      - key: TELEGRAM_BOT_TOKEN
+        sync: false
+      - key: TELEGRAM_CHAT_ID
+        sync: false
+      - key: WHATSAPP_PHONE
+        sync: false
+      - key: CLIENT_URL
+        sync: false # Set to Vercel/Cloudflare URL
+      - key: DISABLE_WHATSAPP
+        value: "false"
+      - key: RENDER_EXTERNAL_URL
+        sync: false # Set to your Render web service URL for Keep-Alive ping
+
