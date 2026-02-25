@@ -96,7 +96,9 @@ class WhatsAppService {
         this.isReady = false;
         this._retries = 0;
         this._maxRetries = 5;
+        this._isInitializing = false;
     }
+
 
     async initialize() {
         if (process.env.DISABLE_WHATSAPP === 'true') {
@@ -105,9 +107,10 @@ class WhatsAppService {
             return;
         }
 
-        if (this.sock) return; // Already initialised
+        if (this.sock || this._isInitializing) return;
+        this._isInitializing = true;
 
-        console.log('[WhatsApp/Baileys] Starting — no Chrome needed, pure WebSocket!');
+        console.log('[WhatsApp/Baileys] Starting connection attempt...');
 
         try {
             // Dynamic import handles Baileys whether it ships as ESM or CJS
@@ -127,15 +130,20 @@ class WhatsAppService {
                 version,
                 auth: state,
                 logger: silentLogger,
-                printQRInTerminal: false,           // We serve QR via API
+                printQRInTerminal: false,
                 browser: ['Trimurti', 'Chrome', '4.0.0'],
-                markOnlineOnConnect: false,           // Anti-ban
-                syncFullHistory: false,           // Faster startup
+                markOnlineOnConnect: false,
+                syncFullHistory: false,
                 generateHighQualityLinkPreview: false,
+                connectTimeoutMs: 60000, // Increased for Free Tier CPU
+                defaultQueryTimeoutMs: 0, // Disable timeout to prevent 408s
             });
+
+            this._isInitializing = false;
 
             // Persist updated credentials to MongoDB
             this.sock.ev.on('creds.update', saveCreds);
+
 
             // Connection lifecycle
             this.sock.ev.on('connection.update', async ({ connection, lastDisconnect, qr }) => {
@@ -178,6 +186,7 @@ class WhatsAppService {
                     this.qrCode = null;
                     this.status = 'ready';
                     this._retries = 0;
+                    this._isInitializing = false;
                     console.log('✅ [WhatsApp/Baileys] Connected! Notifications active.');
                 }
             });
@@ -185,7 +194,9 @@ class WhatsAppService {
         } catch (err) {
             console.error('[WhatsApp/Baileys] Init Error:', err.message);
             this.status = 'error';
+            this._isInitializing = false;
         }
+
     }
 
     getStatus() {
