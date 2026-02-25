@@ -230,10 +230,13 @@ class WhatsAppService {
     }
 
 
-    /** Send booking alert to admin */
+    /** Send booking alert to admin and drivers */
     async sendBookingAlert(booking) {
-        const adminPhone = process.env.WHATSAPP_PHONE;
-        if (!adminPhone) return;
+        const adminPhones = process.env.WHATSAPP_PHONE;
+        if (!adminPhones) return;
+
+        // Support multiple phones separated by commas (e.g., 91XXXXXXXXXX,91YYYYYYYYYY)
+        const phoneList = adminPhones.split(',').map(p => p.trim());
 
         const ref = booking._id?.toString().slice(-6).toUpperCase() || 'NEW';
         const greetings = ['🚨 *New Booking!*', '🚕 *Incoming Request:*', '✨ *Fresh Trip:*', '📍 *New Schedule:*'];
@@ -252,8 +255,11 @@ class WhatsAppService {
             `💰 *Fare:* ₹${booking.fare}\n\n` +
             `_Check Admin Panel for full details_`;
 
-        await this._send(adminPhone, message);
+        for (const phone of phoneList) {
+            await this._send(phone, message);
+        }
     }
+
 
     /** Send status update to customer */
     async sendCustomerNotification(booking, status) {
