@@ -27,14 +27,25 @@ const Navbar = () => {
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? "bg-card/95 backdrop-blur-lg shadow-card border-b border-border" : "bg-transparent"}`}>
       <div className="container flex items-center justify-between h-[72px] mx-auto px-4">
-        <Link href="/" className="flex items-center gap-1.5 group animate-fade-in-down">
-          <img src={typeof logo === 'string' ? logo : (logo as any).src} alt="Trimurti Tours" className="h-9 md:h-11 w-auto object-contain transition-transform duration-300 group-hover:scale-105" />
-          <span className={cn(
-            "font-display text-lg md:text-xl font-bold leading-none transition-colors duration-200",
-            scrolled ? "text-primary" : "text-primary-foreground"
-          )}>
-            Trimurti<span className="text-accent">Tours</span>
-          </span>
+        <Link href="/" className="flex items-center gap-2 group animate-fade-in-down">
+          <div className="relative">
+            <img src={typeof logo === 'string' ? logo : (logo as any).src} alt="Trimurti Tours" className="h-9 md:h-12 w-auto object-contain transition-all duration-500 group-hover:scale-110 group-hover:rotate-3" />
+            <div className="absolute -inset-1 bg-primary/20 rounded-full blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+          </div>
+          <div className="flex flex-col">
+            <span className={cn(
+              "font-display text-base md:text-2xl font-black tracking-tighter transition-colors duration-300 uppercase",
+              scrolled ? "text-primary" : "text-primary-foreground"
+            )}>
+              Trimurti<span className="text-accent">Tours</span>
+            </span>
+            <span className={cn(
+              "text-[8px] md:text-[10px] font-black uppercase tracking-[0.3em] -mt-1 opacity-70",
+              scrolled ? "text-foreground/60" : "text-primary-foreground/60"
+            )}>
+              Travels & Cabs
+            </span>
+          </div>
         </Link>
 
         <div className="hidden md:flex items-center gap-10 animate-fade-in-down" style={{ animationDelay: '0.1s' }}>

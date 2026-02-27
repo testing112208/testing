@@ -169,13 +169,16 @@ const HeroSection = () => {
       <div className="absolute top-1/4 -left-20 w-96 h-96 bg-primary/10 rounded-full blur-[100px] animate-pulse" />
       <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-accent/5 rounded-full blur-[100px] animate-pulse" style={{ animationDelay: '2s' }} />
 
-      <div className="container relative z-10 py-10 md:py-32">
-        <div className="grid lg:grid-cols-2 gap-10 lg:gap-20 items-center">
+      <div className="container relative z-10 pt-28 pb-12 md:pt-40 md:pb-32">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           {/* Text */}
-          <div className="space-y-6 md:space-y-10 text-center lg:text-left">
+          <div className="space-y-8 md:space-y-10 text-center lg:text-left">
             <div className="animate-fade-in-up">
-              <span className="inline-flex items-center gap-2 bg-accent/15 text-accent border border-accent/20 px-4 py-2 rounded-full text-[10px] md:text-sm font-bold tracking-wide backdrop-blur-sm animate-float">
-                <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
+              <span className="inline-flex items-center gap-2.5 bg-accent/20 text-accent border border-accent/30 px-5 py-2.5 rounded-full text-[11px] md:text-sm font-black tracking-wider backdrop-blur-md shadow-xl shadow-accent/5 animate-float">
+                <span className="relative flex h-2.5 w-2.5">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-accent"></span>
+                </span>
                 #1 Reliable Cab Service in Amravati
               </span>
             </div>
