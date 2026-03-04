@@ -30,11 +30,11 @@ import { apiRequest } from "@/lib/api-client";
 
 interface Review {
     _id: string;
-    customerName: string;
+    name: string;
     rating: number;
-    comment: string;
-    date: string;
-    isApproved: boolean;
+    text: string;
+    reviewDate: string;
+    isActive: boolean;
 }
 
 interface Session {
@@ -60,7 +60,7 @@ export default function SettingsPage() {
     const [sessions, setSessions] = useState<Session[]>([]);
     const [reviews, setReviews] = useState<Review[]>([]);
     const [activityLogs, setActivityLogs] = useState<ActivityLog[]>([]);
-    const [newReview, setNewReview] = useState({ customerName: "", comment: "", date: new Date().toISOString().slice(0, 10), rating: 5 });
+    const [newReview, setNewReview] = useState({ name: "", text: "", reviewDate: new Date().toISOString().slice(0, 10), rating: 5 });
     const [addingReview, setAddingReview] = useState(false);
     const [hoverRating, setHoverRating] = useState(0);
 
@@ -111,18 +111,18 @@ export default function SettingsPage() {
         }
     };
 
-    const approveReview = async (id: string) => {
+    const toggleReviewVisibility = async (id: string) => {
         try {
-            const result = await apiRequest<{ success: boolean }>(`/api/reviews/${id}/approve`, {
-                method: "PUT",
+            const result = await apiRequest<{ success: boolean; data: Review }>(`/api/reviews/${id}/toggle`, {
+                method: "PATCH",
                 token
             });
             if (result.success) {
-                setReviews(prev => prev.map(r => r._id === id ? { ...r, isApproved: true } : r));
-                toast.success("Review approved!");
+                setReviews(prev => prev.map(r => r._id === id ? result.data : r));
+                toast.success("Review visibility updated!");
             }
         } catch (error) {
-            toast.error("Failed to approve review.");
+            toast.error("Failed to update review visibility.");
         }
     };
 
@@ -143,7 +143,7 @@ export default function SettingsPage() {
 
     const createReview = async (e: React.FormEvent) => {
         e.preventDefault();
-        if (!newReview.customerName.trim() || !newReview.comment.trim()) {
+        if (!newReview.name.trim() || !newReview.text.trim()) {
             return toast.error("Name and review content are required.");
         }
         setAddingReview(true);
@@ -152,17 +152,16 @@ export default function SettingsPage() {
                 method: "POST",
                 token,
                 body: JSON.stringify({
-                    customerName: newReview.customerName,
-                    comment: newReview.comment,
-                    date: newReview.date,
+                    name: newReview.name,
+                    text: newReview.text,
+                    reviewDate: newReview.reviewDate,
                     rating: newReview.rating,
-                    isApproved: true,
                     isActive: true
                 })
             });
             if (result.success) {
                 setReviews(prev => [result.data, ...prev]);
-                setNewReview({ customerName: "", comment: "", date: new Date().toISOString().slice(0, 10), rating: 5 });
+                setNewReview({ name: "", text: "", reviewDate: new Date().toISOString().slice(0, 10), rating: 5 });
                 toast.success("Review added successfully!");
             }
         } catch (error) {
@@ -276,8 +275,8 @@ export default function SettingsPage() {
                                     <Input
                                         type="text"
                                         placeholder="e.g. Rahul Sharma"
-                                        value={newReview.customerName}
-                                        onChange={e => setNewReview(p => ({ ...p, customerName: e.target.value }))}
+                                        value={newReview.name}
+                                        onChange={e => setNewReview(p => ({ ...p, name: e.target.value }))}
                                         required
                                         className="h-14 rounded-2xl bg-slate-50 border-0 font-bold text-sm focus:ring-4 focus:ring-primary/5 transition-all"
                                     />
@@ -287,8 +286,8 @@ export default function SettingsPage() {
                                     <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Date</label>
                                     <Input
                                         type="date"
-                                        value={newReview.date}
-                                        onChange={e => setNewReview(p => ({ ...p, date: e.target.value }))}
+                                        value={newReview.reviewDate}
+                                        onChange={e => setNewReview(p => ({ ...p, reviewDate: e.target.value }))}
                                         required
                                         className="h-14 rounded-2xl bg-slate-50 border-0 font-bold text-sm focus:ring-4 focus:ring-primary/5 transition-all"
                                     />
@@ -325,8 +324,8 @@ export default function SettingsPage() {
                                 <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Review Content</label>
                                 <textarea
                                     placeholder="Write the customer's review here..."
-                                    value={newReview.comment}
-                                    onChange={e => setNewReview(p => ({ ...p, comment: e.target.value }))}
+                                    value={newReview.text}
+                                    onChange={e => setNewReview(p => ({ ...p, text: e.target.value }))}
                                     required
                                     rows={3}
                                     className="w-full px-5 py-4 bg-slate-50 rounded-2xl border-0 font-medium text-sm text-slate-700 placeholder:text-slate-400 focus:outline-none focus:ring-4 focus:ring-primary/5 transition-all resize-none"
@@ -364,25 +363,23 @@ export default function SettingsPage() {
                                         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                                             <div className="space-y-1">
                                                 <div className="flex items-center gap-2">
-                                                    <span className="font-black text-slate-900 text-sm">{r.customerName}</span>
+                                                    <span className="font-black text-slate-900 text-sm">{r.name}</span>
                                                     <div className="flex items-center text-amber-400">
                                                         {[...Array(5)].map((_, i) => (
                                                             <Star key={i} size={10} fill={i < r.rating ? "currentColor" : "none"} />
                                                         ))}
                                                     </div>
-                                                    {r.isApproved && (
+                                                    {r.isActive && (
                                                         <span className="text-[8px] font-black text-emerald-500 bg-emerald-50 px-2 py-0.5 rounded-full uppercase tracking-widest">Live</span>
                                                     )}
                                                 </div>
-                                                <p className="text-slate-500 text-sm italic">"{r.comment}"</p>
-                                                <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest">{r.date}</p>
+                                                <p className="text-slate-500 text-sm italic">"{r.text}"</p>
+                                                <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest">{r.reviewDate}</p>
                                             </div>
                                             <div className="flex items-center gap-2 shrink-0">
-                                                {!r.isApproved && (
-                                                    <Button onClick={() => approveReview(r._id)} size="sm" className="bg-emerald-500 hover:bg-emerald-600 rounded-xl font-black uppercase text-[10px] tracking-widest h-9 px-4">
-                                                        Approve
-                                                    </Button>
-                                                )}
+                                                <Button onClick={() => toggleReviewVisibility(r._id)} size="sm" className={cn("rounded-xl font-black uppercase text-[10px] tracking-widest h-9 px-4", r.isActive ? "bg-slate-200 text-slate-600 hover:bg-slate-300" : "bg-emerald-500 text-white hover:bg-emerald-600")}>
+                                                    {r.isActive ? "Hide" : "Show / Approve"}
+                                                </Button>
                                                 <Button onClick={() => deleteReview(r._id)} variant="ghost" size="sm" className="text-rose-500 hover:bg-rose-50 rounded-xl h-9 px-4">
                                                     <Trash2 size={16} />
                                                 </Button>
