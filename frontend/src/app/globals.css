@@ -1,343 +1,131 @@
-/* ================================================================
-   CAB SERVES — PROJECT DNA: OBSIDIAN + GOLD (Minimal Premium)
-   DNA: Urban Transport | Audience: Professionals | Urgency: High
-   Emotion: Speed + Authority + Trust
-   Architect: Antigravity Senior Frontend Specialist
-   ================================================================ */
-
-@import url('https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;900&family=Geist+Mono:wght@400;500;600&family=Playfair+Display:wght@600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Playfair+Display:wght@600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
-
-    /* ── Light Mode (Professional Day) ── */
     :root {
-        /* Fluid Typography Scale */
-        --font-size-xs: clamp(0.75rem, 0.7vw + 0.6rem, 0.875rem);
-        --font-size-base: clamp(0.9375rem, 0.8vw + 0.75rem, 1.0625rem);
-        --font-size-lg: clamp(1.125rem, 1.2vw + 0.9rem, 1.5rem);
-        --font-size-xl: clamp(1.375rem, 2vw + 1rem, 2rem);
-        --font-size-2xl: clamp(1.875rem, 3.5vw + 1.25rem, 3.25rem);
-        --font-size-3xl: clamp(2.5rem, 5vw + 1.5rem, 5rem);
+        --font-size-base: clamp(1rem, 0.95vw + 0.8rem, 1.125rem);
+        --font-size-lg: clamp(1.25rem, 1.5vw + 1rem, 1.75rem);
+        --font-size-xl: clamp(1.5rem, 2.5vw + 1.25rem, 2.5rem);
+        --font-size-2xl: clamp(2rem, 4vw + 1.5rem, 4rem);
 
         --container-px: clamp(1rem, 5vw, 2.5rem);
 
-        /* ── Obsidian + Gold DNA Tokens (Light Surface) ── */
-        --background: 210 11% 97%;
-        /* Near-white: #f8f8f9 */
-        --foreground: 240 5% 6%;
-        /* Obsidian text: #0f0f11 */
+        --background: 210 20% 98%;
+        --foreground: 200 25% 10%;
 
         --card: 0 0% 100%;
-        --card-foreground: 240 5% 6%;
+        --card-foreground: 200 25% 10%;
 
         --popover: 0 0% 100%;
-        --popover-foreground: 240 5% 6%;
+        --popover-foreground: 200 25% 10%;
 
-        /* Primary = Gold Authority (used minimally, only on CTAs) */
-        --primary: 38 95% 54%;
-        /* Amber-400: #f59e0b */
-        --primary-foreground: 240 5% 6%;
-        /* Black text on gold */
+        --primary: 186 60% 28%;
+        --primary-foreground: 0 0% 100%;
 
-        --secondary: 240 5% 96%;
-        --secondary-foreground: 240 5% 20%;
+        --secondary: 186 25% 95%;
+        --secondary-foreground: 186 60% 22%;
 
-        --muted: 240 5% 94%;
-        --muted-foreground: 240 4% 46%;
+        --muted: 210 12% 94%;
+        --muted-foreground: 200 10% 45%;
 
-        --accent: 38 95% 54%;
-        --accent-foreground: 240 5% 6%;
+        --accent: 38 90% 55%;
+        --accent-foreground: 0 0% 100%;
 
-        --destructive: 0 72% 50%;
-        --destructive-foreground: 0 0% 100%;
+        --destructive: 0 84.2% 60.2%;
+        --destructive-foreground: 210 40% 98%;
 
-        --border: 240 5% 88%;
-        --input: 240 5% 88%;
-        --ring: 38 95% 54%;
-        /* Gold focus ring */
+        --border: 210 12% 91%;
+        --input: 210 12% 91%;
+        --ring: 186 60% 28%;
 
-        /* Sharp Geometry — precision signals authority */
-        --radius: 0.25rem;
-        /* 4px — not playful. Professional. */
+        --radius: 0.75rem;
 
-        /* Sidebar (Admin/Operator) */
-        --sidebar-background: 240 5% 6%;
-        /* Deep obsidian sidebar */
-        --sidebar-foreground: 240 5% 80%;
-        --sidebar-primary: 38 95% 54%;
-        --sidebar-primary-foreground: 240 5% 6%;
-        --sidebar-accent: 240 5% 12%;
-        --sidebar-accent-foreground: 240 5% 80%;
-        --sidebar-border: 240 5% 14%;
-        --sidebar-ring: 38 95% 54%;
+        --sidebar-background: 0 0% 98%;
+        --sidebar-foreground: 240 5.3% 26.1%;
+        --sidebar-primary: 240 5.9% 10%;
+        --sidebar-primary-foreground: 0 0% 98%;
+        --sidebar-accent: 240 4.8% 95.9%;
+        --sidebar-accent-foreground: 240 5.9% 10%;
+        --sidebar-border: 220 13% 91%;
+        --sidebar-ring: 217.2 91.2% 59.8%;
 
-        /* Semantic Status Tokens */
-        --gold: 38 95% 54%;
-        --gold-foreground: 38 90% 20%;
+        --teal-light: 186 35% 96%;
+        --teal-dark: 186 65% 18%;
+        --gold: 38 90% 55%;
+        --gold-foreground: 38 80% 20%;
         --whatsapp: 142 70% 36%;
-        --status-active: 142 60% 40%;
-        --status-inactive: 240 4% 60%;
-        --status-alert: 0 72% 50%;
     }
 
-    /* ── Dark Mode (Night Ops — True Obsidian) ── */
     .dark {
-        --background: 240 5% 4%;
-        /* True Obsidian: #09090b */
-        --foreground: 240 5% 97%;
-        /* Crisp White */
-
-        --card: 240 5% 7%;
-        /* Lifted Obsidian: #111113 */
-        --card-foreground: 240 5% 97%;
-
-        --popover: 240 5% 7%;
-        --popover-foreground: 240 5% 97%;
-
-        --primary: 38 95% 54%;
-        /* Gold stays gold */
-        --primary-foreground: 240 5% 4%;
-        /* Black on gold */
-
-        --secondary: 240 5% 11%;
-        --secondary-foreground: 240 5% 75%;
-
-        --muted: 240 5% 11%;
-        --muted-foreground: 240 4% 55%;
-
-        --accent: 38 95% 54%;
-        --accent-foreground: 240 5% 4%;
-
-        --destructive: 0 62% 40%;
-        --destructive-foreground: 0 0% 100%;
-
-        --border: 240 5% 13%;
-        /* Invisible border — premium restraint */
-        --input: 240 5% 13%;
-        --ring: 38 95% 54%;
+        --background: 200 25% 8%;
+        --foreground: 210 20% 95%;
+        --card: 200 20% 12%;
+        --card-foreground: 210 20% 95%;
+        --popover: 200 20% 12%;
+        --popover-foreground: 210 20% 95%;
+        --primary: 186 55% 45%;
+        --primary-foreground: 0 0% 100%;
+        --secondary: 200 20% 18%;
+        --secondary-foreground: 186 40% 70%;
+        --muted: 200 15% 18%;
+        --muted-foreground: 200 10% 60%;
+        --accent: 38 80% 50%;
+        --accent-foreground: 0 0% 100%;
+        --destructive: 0 62.8% 30.6%;
+        --destructive-foreground: 210 40% 98%;
+        --border: 200 15% 20%;
+        --input: 200 15% 20%;
+        --ring: 186 55% 45%;
     }
 }
 
-/* ── Global Base Styles ── */
 @layer base {
-
-    *,
-    *::before,
-    *::after {
+    * {
         @apply border-border;
-        box-sizing: border-box;
-    }
-
-    html {
-        scroll-behavior: smooth;
-        -webkit-text-size-adjust: 100%;
     }
 
     body {
         @apply bg-background text-foreground antialiased;
-        font-family: 'Geist', system-ui, sans-serif;
         font-size: var(--font-size-base);
-        font-feature-settings: "rlig" 1, "calt" 1, "ss01" 1;
-        line-height: 1.6;
-    }
-
-    /* Headings: Geist for authority, Playfair for premium moments */
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-        font-family: 'Geist', sans-serif;
-        font-weight: 700;
-        letter-spacing: -0.025em;
-        line-height: 1.15;
-        color: hsl(var(--foreground));
-    }
-
-    /* Monospace: data, IDs, status values — reads like a dispatch console */
-    code,
-    kbd,
-    samp,
-    pre,
-    .mono {
-        font-family: 'Geist Mono', monospace;
-        font-size: 0.875em;
-    }
-
-    /* Focus styles — accessibility without ugliness */
-    :focus-visible {
-        outline: 2px solid hsl(var(--ring));
-        outline-offset: 3px;
-        border-radius: var(--radius);
-    }
-
-    ::selection {
-        background-color: hsl(38 95% 54% / 0.2);
-        color: hsl(var(--foreground));
+        font-family: 'DM Sans', system-ui, sans-serif;
     }
 }
 
-/* ── Component System ── */
 @layer components {
-
-    /* ── Typography Scale ── */
-    .heading-display {
-        font-family: 'Playfair Display', serif;
-        font-size: var(--font-size-3xl);
-        font-weight: 700;
-        letter-spacing: -0.04em;
-        line-height: 1.05;
-    }
-
-    .heading-1 {
-        font-size: var(--font-size-2xl);
-        font-weight: 900;
-        letter-spacing: -0.03em;
-        line-height: 1.1;
-    }
-
-    .heading-2 {
-        font-size: var(--font-size-xl);
-        font-weight: 700;
-        letter-spacing: -0.02em;
-    }
-
-    /* ── Section Anatomy ── */
-    .section-label {
-        @apply inline-flex items-center gap-2;
-        font-family: 'Geist Mono', monospace;
-        font-size: 0.6875rem;
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 0.15em;
-        color: hsl(var(--primary));
-        margin-bottom: 1rem;
-    }
-
-    .section-label::before {
-        content: '';
-        width: 1.5rem;
-        height: 1px;
-        background-color: hsl(var(--primary));
-        display: inline-block;
+    .section-badge {
+        @apply inline-block text-primary font-bold text-[10px] tracking-[0.2em] uppercase bg-primary/5 px-4 py-1.5 rounded-full border border-primary/10 mb-4;
     }
 
     .section-title {
-        @apply heading-1 text-foreground mb-4;
+        @apply font-black text-foreground mt-3 font-display leading-[1.15] tracking-tight;
     }
 
     .section-subtitle {
-        font-size: var(--font-size-lg);
-        color: hsl(var(--muted-foreground));
-        max-width: 42ch;
-        line-height: 1.65;
-        font-weight: 400;
+        @apply text-muted-foreground mt-5 text-base md:text-lg leading-relaxed max-w-2xl mx-auto font-medium;
     }
 
-    /* ── Card System (Obsidian Dark, Elevated Light) ── */
-    .card-base {
-        @apply rounded-[var(--radius)] border border-border bg-card;
-        transition: border-color 0.2s ease, box-shadow 0.25s ease, transform 0.2s ease;
+    .card-elevated {
+        @apply bg-white rounded-[2rem] border border-slate-100 shadow-sm transition-all duration-500 overflow-hidden;
+        @apply hover:shadow-2xl hover:shadow-primary/5 hover:border-primary/30 hover:-translate-y-2 hover:scale-[1.01] active:scale-[0.98];
     }
 
-    .card-interactive {
-        @apply card-base;
-    }
-
-    .card-interactive:hover {
-        border-color: hsl(var(--primary) / 0.4);
-        box-shadow: 0 0 0 1px hsl(var(--primary) / 0.15), 0 8px 32px -8px hsl(var(--primary) / 0.2);
-        transform: translateY(-2px);
-    }
-
-    .card-stat {
-        @apply card-base p-6 flex flex-col gap-2;
-    }
-
-    /* ── Input System ── */
     .input-field {
-        @apply w-full px-4 py-3.5 rounded-[var(--radius)] bg-muted border border-border;
-        @apply text-sm font-medium text-foreground placeholder:text-muted-foreground;
-        @apply focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/50;
-        @apply transition-all duration-200;
-        font-family: 'Geist', sans-serif;
+        @apply w-full pl-11 pr-4 py-4 rounded-2xl bg-slate-50 border-transparent text-sm font-bold placeholder:text-slate-400 focus:outline-none focus:ring-4 focus:ring-primary/5 focus:bg-white focus:border-primary/20 transition-all duration-300;
     }
 
-    /* ── Button System ── */
     .btn-primary {
-        @apply inline-flex items-center justify-center gap-2.5;
-        @apply px-6 py-3.5 rounded-[var(--radius)];
-        @apply bg-primary text-primary-foreground;
-        @apply font-semibold text-sm tracking-wide;
-        @apply transition-all duration-150 ease-out;
-        @apply hover:brightness-105 active:scale-[0.97];
-        @apply focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2;
-        font-family: 'Geist', sans-serif;
-    }
-
-    .btn-secondary {
-        @apply inline-flex items-center justify-center gap-2.5;
-        @apply px-6 py-3.5 rounded-[var(--radius)];
-        @apply bg-secondary text-secondary-foreground border border-border;
-        @apply font-semibold text-sm tracking-wide;
-        @apply transition-all duration-150 ease-out;
-        @apply hover:bg-muted active:scale-[0.97];
-        font-family: 'Geist', sans-serif;
-    }
-
-    .btn-ghost {
-        @apply inline-flex items-center justify-center gap-2;
-        @apply px-4 py-2.5 rounded-[var(--radius)];
-        @apply text-muted-foreground font-medium text-sm;
-        @apply transition-all duration-150 ease-out;
-        @apply hover:bg-muted hover:text-foreground active:scale-[0.97];
-    }
-
-    /* ── Status Badges (Dispatch Console Style) ── */
-    .badge-status {
-        @apply inline-flex items-center gap-1.5 px-2.5 py-1;
-        @apply rounded-full text-xs font-semibold;
-        font-family: 'Geist Mono', monospace;
-        letter-spacing: 0.03em;
-    }
-
-    .badge-active {
-        @apply badge-status bg-emerald-500/10 text-emerald-500;
-    }
-
-    .badge-inactive {
-        @apply badge-status bg-muted text-muted-foreground;
-    }
-
-    .badge-alert {
-        @apply badge-status bg-red-500/10 text-red-500;
-    }
-
-    .badge-pending {
-        @apply badge-status bg-amber-500/10 text-amber-500;
-    }
-
-    /* ── Data Table (Operator Dispatch) ── */
-    .table-cell {
-        @apply px-4 py-3.5 text-sm text-foreground;
-        font-family: 'Geist', sans-serif;
-    }
-
-    .table-head {
-        @apply px-4 py-3 text-xs font-semibold text-muted-foreground uppercase tracking-widest;
-        font-family: 'Geist Mono', monospace;
+        @apply w-full bg-primary text-white py-[1.125rem] rounded-2xl font-black text-base hover:brightness-110 active:scale-[0.98] transition-all duration-300 shadow-xl shadow-primary/20 flex items-center justify-center gap-2;
     }
 }
 
-/* ── Utility Layer ── */
 @layer utilities {
+    .text-gradient {
+        @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent;
+    }
 
-    /* Layout */
     .container-fluid {
         width: 100%;
         margin-left: auto;
@@ -345,77 +133,5 @@
         padding-left: var(--container-px);
         padding-right: var(--container-px);
         max-width: 1400px;
-    }
-
-    /* Gold gradient — used sparingly on hero titles only */
-    .text-gold-gradient {
-        background: linear-gradient(135deg, hsl(38 95% 65%), hsl(38 95% 45%));
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-    }
-
-    /* Obsidian Glass — dark mode cards with depth */
-    .glass-obsidian {
-        background: hsl(240 5% 7% / 0.8);
-        backdrop-filter: blur(16px) saturate(1.4);
-        -webkit-backdrop-filter: blur(16px) saturate(1.4);
-        border: 1px solid hsl(240 5% 14%);
-    }
-
-    /* Gold Shimmer — loading states for premium feel */
-    .shimmer-gold {
-        background: linear-gradient(90deg,
-                hsl(240 5% 13%) 0%,
-                hsl(38 95% 54% / 0.08) 50%,
-                hsl(240 5% 13%) 100%);
-        background-size: 200% 100%;
-        animation: shimmer-gold 1.8s ease-in-out infinite;
-    }
-
-    @keyframes shimmer-gold {
-        0% {
-            background-position: 200% 0;
-        }
-
-        100% {
-            background-position: -200% 0;
-        }
-    }
-
-    /* Fade-in up — cinematic entrance (used on sections) */
-    .animate-enter {
-        animation: enter 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    }
-
-    @keyframes enter {
-        from {
-            opacity: 0;
-            transform: translateY(24px);
-        }
-
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-
-    /* Scrollbar (Obsidian Premium) */
-    ::-webkit-scrollbar {
-        width: 6px;
-        height: 6px;
-    }
-
-    ::-webkit-scrollbar-track {
-        background: transparent;
-    }
-
-    ::-webkit-scrollbar-thumb {
-        background: hsl(240 5% 20%);
-        border-radius: 3px;
-    }
-
-    ::-webkit-scrollbar-thumb:hover {
-        background: hsl(38 95% 54% / 0.5);
     }
 }
