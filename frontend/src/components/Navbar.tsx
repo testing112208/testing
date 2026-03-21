@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import NextLink from "next/link";
 const Link = NextLink as any;
 import { usePathname } from "next/navigation";
-import AnimatedLogo from "@/components/AnimatedLogo";
+import logo from "@/assets/logo.webp";
 import { cn } from "@/lib/utils";
 
 const Navbar = () => {
@@ -29,8 +29,8 @@ const Navbar = () => {
       <div className="container flex items-center justify-between h-[72px] mx-auto px-4">
         <Link href="/" className="flex items-center gap-2 group animate-fade-in-down">
           <div className="relative">
-            <AnimatedLogo className="h-8 md:h-11 w-8 md:w-11" />
-            <div className="absolute -inset-1 bg-primary/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <img src={typeof logo === 'string' ? logo : (logo as any).src} alt="Trimurti Tours" className="h-9 md:h-12 w-auto object-contain transition-all duration-500 group-hover:scale-110 group-hover:rotate-3" />
+            <div className="absolute -inset-1 bg-primary/20 rounded-full blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
           </div>
           <div className="flex flex-col">
             <span className={cn(
