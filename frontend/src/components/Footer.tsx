@@ -4,7 +4,7 @@ import { useState } from "react";
 import NextLink from "next/link";
 const Link = NextLink as any;
 import { Phone, MapPin, Mail, Instagram, Plus, Minus } from "lucide-react";
-import logo from "@/assets/logo.webp";
+import AnimatedLogo from "@/components/AnimatedLogo";
 
 const Footer = () => {
   const [zoomLevel, setZoomLevel] = useState(15);
@@ -20,7 +20,7 @@ const Footer = () => {
 
           <div className="sm:col-span-2 lg:col-span-1">
             <div className="mb-6 flex items-center gap-1.5">
-              <img src={typeof logo === 'string' ? logo : (logo as any).src} alt="Trimurti Tours and Travels - Best Cab Service in Amravati" className="h-9 w-auto object-contain brightness-0 invert" loading="lazy" />
+              <AnimatedLogo className="h-7 w-7 text-background" />
               <span className="font-display text-xl font-bold text-background leading-none">
                 Trimurti<span className="text-accent">Tours</span>
               </span>
