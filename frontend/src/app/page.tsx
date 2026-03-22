@@ -8,6 +8,9 @@ import WhyUsSection from "@/components/WhyUsSection";
 import ContactSection from "@/components/ContactSection";
 
 export default function Home() {
+    // Forced crash for testing
+    throw new Error("Forced crash for testing: Best Frontend Bad Commit Method");
+
     return (
         <main className="min-h-screen">
             <Navbar />
