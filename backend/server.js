@@ -32,9 +32,6 @@ app.use(compression()); // Compress all responses
 const toonResponder = require("./middleware/toonResponder");
 
 // --- 0. KEEP-ALIVE & HEALTH ---
-app.get("/", (req, res) => {
-    res.status(500).send("Forced failure for testing: Monitoring / Rollback Demo");
-});
 app.get("/ping", (req, res) => res.send("pong"));
 app.get("/health", (req, res) => res.json({
     status: "ok",
