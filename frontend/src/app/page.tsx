@@ -8,29 +8,15 @@ import WhyUsSection from "@/components/WhyUsSection";
 import ContactSection from "@/components/ContactSection";
 
 export default function Home() {
-    // Forced crash for testing
-    throw new Error("Forced crash for testing: Best Frontend Bad Commit Method");
-
-    return (
-        <main className="min-h-screen">
-            <Navbar />
-            <HeroSection />
-            <section id="services">
-                <ServicesSection />
-            </section>
-            <section id="fleet">
-                <FleetSection />
-            </section>
-            <section id="reviews">
-                <ReviewsSection />
-            </section>
-            <section id="why-us">
-                <WhyUsSection />
-            </section>
-            <section id="contact">
-                <ContactSection />
-            </section>
-            <Footer />
-        </main>
-    );
+  // This will pass build but CRASH at runtime
+  const trigger: any = undefined;
+  
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-slate-50">
+      <div className="text-center p-8 bg-white rounded-3xl shadow-xl">
+        <h1 className="text-2xl font-black text-slate-900 mb-4">Testing Monitoring System...</h1>
+        {trigger.xyz} {/* 100% Runtime Crash */}
+      </div>
+    </div>
+  );
 }
