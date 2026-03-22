@@ -241,7 +241,7 @@ const HeroSection = () => {
               className="bg-white rounded-[2rem] sm:rounded-[3rem] shadow-[0_30px_80px_rgba(0,0,0,0.25)] p-6 sm:p-10 md:p-12 space-y-5 border border-slate-100 relative group/form"
             >
               <div className="text-center sm:text-left mb-2 md:mb-6">
-                <h2 className="text-2xl md:text-4xl font-black text-slate-900 font-display tracking-tight leading-tight">Book Your Ride</h2>
+                <h2 className="text-2xl md:text-4xl font-black text-slate-900 font-display tracking-tight leading-tight">Book Your Ride X</h2>
                 <p className="text-slate-500 text-[9px] md:text-xs mt-2 font-black uppercase tracking-[0.2em]">Instant confirmation online</p>
               </div>
 
