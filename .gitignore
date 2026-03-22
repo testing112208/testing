@@ -31,3 +31,9 @@ build/
 # VS Code
 .vscode/
 .history/
+
+# Build outputs
+out/
+.next/
+frontend/out/
+frontend/.next/

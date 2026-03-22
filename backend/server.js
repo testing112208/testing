@@ -40,6 +40,14 @@ app.get("/health", (req, res) => res.json({
 }));
 
 // --- 1. GLOBAL SECURITY & CORS ---
+// Support Private Network Access (PNA) for local development testing from public URLs
+app.use((req, res, next) => {
+    if (req.headers['access-control-request-private-network']) {
+        res.setHeader('Access-Control-Allow-Private-Network', 'true');
+    }
+    next();
+});
+
 app.use(cors({
     origin: (origin, callback) => {
         const allowed = [
