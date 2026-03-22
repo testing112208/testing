@@ -12,17 +12,25 @@ interface FetchOptions extends RequestInit {
  * 3. https://cab-serves-backend.onrender.com (Production fallback)
  */
 export function getApiBaseUrl(): string {
-    if (process.env.NEXT_PUBLIC_API_URL) return process.env.NEXT_PUBLIC_API_URL;
+    const envUrl = process.env.NEXT_PUBLIC_API_URL;
+    const prodUrl = "https://cab-serves-backend.onrender.com";
     
     // Check if we are running in the browser
     if (typeof window !== "undefined") {
         const { hostname } = window.location;
-        if (hostname === "localhost" || hostname === "127.0.0.1" || hostname.startsWith("192.168.")) {
-            return "http://127.0.0.1:5000";
+        const isLocal = hostname === "localhost" || hostname === "127.0.0.1" || hostname.startsWith("192.168.");
+        
+        // If we're on a public domain but the baked-in envUrl is localhost, override with production URL
+        if (!isLocal && envUrl && (envUrl.includes("localhost") || envUrl.includes("127.0.0.1"))) {
+            return prodUrl;
+        }
+
+        if (isLocal) {
+            return envUrl || "http://127.0.0.1:5000";
         }
     }
     
-    return "https://cab-serves-backend.onrender.com";
+    return envUrl || prodUrl;
 }
 
 export async function apiRequest<T>(endpoint: string, options: FetchOptions = {}): Promise<T> {
