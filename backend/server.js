@@ -33,9 +33,11 @@ const toonResponder = require("./middleware/toonResponder");
 
 // --- 0. KEEP-ALIVE & HEALTH ---
 app.get("/ping", (req, res) => res.send("pong"));
-app.get("/api/health", (req, res) => {
-    res.status(500).json({ status: "fail", message: "Extreme Both Failure Test" });
-});
+app.get("/health", (req, res) => res.json({
+    status: "ok",
+    uptime: process.uptime(),
+    timestamp: new Date().toISOString()
+}));
 
 // --- 1. GLOBAL SECURITY & CORS ---
 // Support Private Network Access (PNA) for local development testing from public URLs
