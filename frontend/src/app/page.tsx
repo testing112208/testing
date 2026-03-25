@@ -14,7 +14,7 @@ export default function Home() {
         <h1 className="text-5xl font-black text-white tracking-tight mb-4">
           SYSTEM <span className="text-red-500">CRITICAL</span>
         </h1>
-        <p className="text-red-500/50 font-black uppercase tracking-[0.5em] text-[10px] mb-12 italic">Final Verification Test Running...</p>
+        <p className="text-red-500/50 font-black uppercase tracking-[0.5em] text-[10px] mb-12 italic">Verification Test Running...</p>
         
         <div className="animate-pulse flex flex-col items-center gap-6">
           <div className="w-1.5 h-1.5 rounded-full bg-red-500" />
