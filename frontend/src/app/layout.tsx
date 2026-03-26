@@ -8,6 +8,9 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
     title: "Trimurti Tours & Travels | Best Cab Service in Amravati",
     description: "Most trusted taxi service in Amravati for local, outstation, and Nagpur airport pick-up & drop.",
+    icons: {
+        icon: "/logo.svg",
+    },
 };
 
 export default function RootLayout({
